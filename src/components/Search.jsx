@@ -18,7 +18,7 @@ function Search(props) {
           id="search"
           onChange={inputHandler}
           defaultValue={q}
-          placeholder="search beers by name"
+          placeholder="search movies by name"
         />
       </div>
     </>
