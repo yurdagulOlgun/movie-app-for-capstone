@@ -10,3 +10,7 @@ export const fetchTrendDayMovies = () => BASE_AXIOS.get(`/trending/all/day?api_k
 export const fetchTrendWeekMovies = () => BASE_AXIOS.get(`/trending/all/week?api_key=${API_KEY}`);
 export const fetchPopularMovies = () => BASE_AXIOS.get(`/movie/popular?api_key=${API_KEY}&page=1`);
 export const fetchTopRatedMovies = () => BASE_AXIOS.get(`/movie/top_rated?api_key=${API_KEY}&page=1`);
+export const fetchDetail = (movieId) => BASE_AXIOS.get(`/movie/${movieId}?api_key=${API_KEY}`);
+export const fetchCast = (movieId) => BASE_AXIOS.get(`/movie/${movieId}/credits?api_key=${API_KEY}`);
+
+

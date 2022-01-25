@@ -9,7 +9,7 @@ const routes = [
   {title:"Home", path:"/", element:Home},
   {title:"About", path:"about", element:About},
   {title:"Profile", path:"profile", element:Profile},
-  {title:"MovieDetail", path:"/:postId", element:MovieDetail},
+  {title:"MovieDetail", path:"/:movieId", element:MovieDetail},
   {title:"Popular", path:"popular", element: Popular},
   {title:"Top Rated", path:"top-rated", element: TopRated}
 ]
