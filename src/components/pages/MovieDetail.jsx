@@ -1,7 +1,10 @@
 import { useParams } from "react-router-dom";
-import { Container, Col, Row, Card } from "react-bootstrap";
+import { Container, Row, Card } from "react-bootstrap";
 import { useQuery } from "react-query";
-import { fetchDetail ,fetchCast} from "../../data";
+import { fetchDetail } from "../../data";
+import Cast from "../Cast";
+import Reviews from "../Reviews";
+import Recommendations from "../Recommendations";
 
 export default function MovieDetail(props) {
   const params = useParams();
@@ -15,15 +18,7 @@ export default function MovieDetail(props) {
       select: (data) => data.data,
     }
   );
-  const { castData } = useQuery(
-    ["movies cast ", movieId],
-    () => fetchCast(movieId),
-    {
-      retry: false,
-      select: (data) => data.data.crew,
-    }
-  );
-console.log(castData);
+
   return (
     <>
       <Container>
@@ -34,7 +29,7 @@ console.log(castData);
           >
             <Card.Img
               src={`https://image.tmdb.org/t/p/w500${data?.poster_path}`}
-              className="w-50"
+              className="w-100"
             />
             <Card.Body>
               <Card.Title>{data?.title}</Card.Title>
@@ -44,18 +39,19 @@ console.log(castData);
                   <p key={item.id}> | {item?.name} | </p>
                 ))}
               </Card.Text>
-              <Card.Title>Movie Crew</Card.Title>
-              <Card.Text>
-                {castData?.crew?.map((item) => (
-                  <h6 key={item.id}>
-                    Name: {item?.name}-{item?.known_for_department}
-                  </h6>
-                ))}
-              </Card.Text>
+              <Card.Title>Overview</Card.Title>
               <Card.Text>{data?.overview}</Card.Text>
+              <Row>
+                <Cast movieId={movieId} />
+              </Row>
             </Card.Body>
           </Card>
         </Row>
+        <Row>
+          <Reviews movieId={movieId} />
+          <Recommendations movieId={movieId} />
+        </Row>
+        
       </Container>
     </>
   );

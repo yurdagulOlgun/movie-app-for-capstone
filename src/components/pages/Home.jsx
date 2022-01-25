@@ -36,7 +36,7 @@ export default function Home() {
               .map((item) => (
                 <Col key={item.id} xs={12} md={4} lg={3}>
                   <Card className="m-2">
-                    <Link to={`https://api.themoviedb.org/3/movie/${item.id}`} style={{ textDecoration: 'none' , color: "black"}}>
+                    <Link to={`${item.id}`} style={{ textDecoration: 'none' , color: "black"}}>
                       <Card.Img
                         src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
                         className="w-100"
