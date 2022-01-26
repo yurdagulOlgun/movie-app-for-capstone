@@ -11,6 +11,7 @@ export default function Discover() {
   });
 
   var settings = {
+    arrows: false,
     autoplay: true,
     dots: true,
     infinite: true,

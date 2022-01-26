@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { Container, Row, Card } from "react-bootstrap";
+import { Container, Row, Card, Col } from "react-bootstrap";
 import { useQuery } from "react-query";
 import { fetchDetail } from "../../data";
 import Cast from "../Cast";
@@ -51,7 +51,6 @@ export default function MovieDetail(props) {
           <Reviews movieId={movieId} />
           <Recommendations movieId={movieId} />
         </Row>
-        
       </Container>
     </>
   );

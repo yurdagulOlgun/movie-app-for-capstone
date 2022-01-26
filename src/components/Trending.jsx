@@ -10,6 +10,7 @@ export default function Trending() {
     select: (data) => data.data.results,
   });
   var settings = {
+    arrows: false,
     autoplay: true,
     dots: true,
     infinite: true,
