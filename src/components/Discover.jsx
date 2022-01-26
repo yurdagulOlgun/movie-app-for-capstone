@@ -11,6 +11,7 @@ export default function Discover() {
     retry: false,
     select: (data) => data.data.results,
   });
+  
   var settings = {
     dots: true,
     infinite: true,
