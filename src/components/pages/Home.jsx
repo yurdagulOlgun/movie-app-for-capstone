@@ -7,8 +7,6 @@ import Trending from "../Trending";
 import { fetchSearchMovies } from "../../data";
 import { Link } from "react-router-dom";
 
-// import Pagination from "../Pagination";
-
 export default function Home() {
   const [q, setQ] = useState("");
   const inputRef = useRef();
@@ -16,6 +14,8 @@ export default function Home() {
     retry: false,
     select: (data) => data.data.results,
   });
+
+  
 
   if (q !== "" && inputRef !== "") {
     return (
@@ -36,7 +36,10 @@ export default function Home() {
               .map((item) => (
                 <Col key={item.id} xs={12} md={4} lg={3}>
                   <Card className="m-2">
-                    <Link to={`${item.id}`} style={{ textDecoration: 'none' , color: "black"}}>
+                    <Link
+                      to={`${item.id}`}
+                      style={{ textDecoration: "none", color: "black" }}
+                    >
                       <Card.Img
                         src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
                         className="w-100"
@@ -55,9 +58,6 @@ export default function Home() {
     );
   }
 
-  //   const [movieData, setMovieData] = useState([]);
-  //   const [offset, setOffset] = useState(0);
-
   return (
     <>
       <Container>
@@ -68,22 +68,15 @@ export default function Home() {
         </Row>
       </Container>
       <Container>
-        <Row>
+        <Row className="mt-3">
           <h3>Discover</h3>
           <Discover />
         </Row>
-        <Row>
+        <Row className="mt-5">
           <h3>Trending</h3>
           <Trending />
         </Row>
       </Container>
-
-      {/* <Pagination
-        movieData={movieData}
-        setMovieData={setMovieData}
-        offset={offset}
-        setOffset={setOffset}
-      /> */}
     </>
   );
 }

@@ -11,6 +11,7 @@ import {
   ButtonGroup,
 } from "react-bootstrap";
 import { useState } from "react";
+import Slider from "react-slick";
 
 export default function TopRated() {
   const { data } = useQuery("movies", fetchPopularMovies, {
@@ -24,12 +25,20 @@ export default function TopRated() {
     setValue(e);
   };
 
+  var settings = {
+    autoplay: true,
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 3,
+  };
+
   return (
     <>
       <Container className="mt-3">
         <Row>
-          <h1 className="text-center mb-3">Popular Movies</h1>
-          <Col className=" border border-warning ">
+          <Col className=" border border-warning align-self-start mt-5" xs={3} >
             <DropdownButton
               variant="warning"
               alignRight
@@ -57,48 +66,74 @@ export default function TopRated() {
                 Decreasing by Release Date
               </Dropdown.Item>
             </DropdownButton>
-            <Row className="mt-3">
-              <div className=" d-flex flex-column">
-                <h3>Filter By</h3>
-               <label htmlFor="text" className="mt-3">From:</label>
-               <label htmlFor="text" className="mt-3">To:</label>
-              </div>
-            </Row>
-            <ButtonGroup size="sm" >
-              <Button className="m-2" variant="warning">Action</Button>
-              <Button className="m-2" variant="warning">Adventure</Button>
-              <Button className="m-2" variant="warning">Comedy</Button>
+
+            <div className=" d-flex flex-column">
+              <h3 className="mt-3">Filter By</h3>
+              <label htmlFor="text" className="mt-3">
+                From:
+              </label>
+              <label htmlFor="text" className="mt-3">
+                To:
+              </label>
+            </div>
+
+            <ButtonGroup size="sm" className="mt-2">
+              <Button className="m-2" variant="warning">
+                Action
+              </Button>
+              <Button className="m-2" variant="warning">
+                Adventure
+              </Button>
+              <Button className="m-2" variant="warning">
+                Comedy
+              </Button>
             </ButtonGroup>
             <ButtonGroup size="sm">
-              <Button className="m-2" variant="warning">Romance</Button>
-              <Button className="m-2" variant="warning">Drama</Button>
-              <Button className="m-2" variant="warning">Comedy</Button>
+              <Button className="m-2" variant="warning">
+                Romance
+              </Button>
+              <Button className="m-2" variant="warning">
+                Drama
+              </Button>
+              <Button className="m-2" variant="warning">
+                Comedy
+              </Button>
             </ButtonGroup>
             <ButtonGroup size="sm">
-              <Button className="m-2" variant="warning">Horror</Button>
-              <Button className="m-2" variant="warning">Science Fiction</Button>
-              <Button className="m-2" variant="warning">War</Button>
+              <Button className="m-2" variant="warning">
+                Horror
+              </Button>
+              <Button className="m-2" variant="warning">
+                Science Fiction
+              </Button>
+              <Button className="m-2" variant="warning">
+                War
+              </Button>
             </ButtonGroup>
-            <Col>
-              <Button className="mt-5" variant="secondary" size="sm">Search</Button>
-            </Col>
-              
-            
+
+            <Button className="m-2" variant="secondary" size="sm">
+              Search
+            </Button>
           </Col>
-          {data?.map((item) => (
-            <Col key={item.id} xs={12} md={4} lg={3}>
-              <Card className="m-2">
-                <Card.Img
-                  src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
-                  className="w-100"
-                />
-                <Card.Body>
-                  <Card.Title>{item.title}</Card.Title>
-                  <Card.Text>{item.release_date}</Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-          ))}
+          <Col xs={9} >
+            <h1 className="text-center  ">Popular Movies</h1>
+            <Slider {...settings}>
+              {data?.map((item) => (
+                <Col key={item.id} xs={12} md={4} lg={3}>
+                  <Card className="m-2">
+                    <Card.Img
+                      src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+                      className="w-100"
+                    />
+                    <Card.Body>
+                      <Card.Title>{item.title}</Card.Title>
+                      <Card.Text>{item.release_date}</Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))}
+            </Slider>
+          </Col>
         </Row>
       </Container>
     </>
