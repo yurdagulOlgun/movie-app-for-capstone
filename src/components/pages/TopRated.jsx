@@ -1,8 +1,9 @@
 import { useQuery } from "react-query";
 import { fetchTopRatedMovies } from "../../data";
-import { Col, Card, Container, Row } from "react-bootstrap";
-
-
+import { Col, Container, Row } from "react-bootstrap";
+import SortFilter from "../SortFilter";
+import Slider from "react-slick";
+import MovieCard from "../MovieCard";
 
 export default function TopRated() {
   const { data } = useQuery("movies", fetchTopRatedMovies, {
@@ -10,27 +11,34 @@ export default function TopRated() {
     select: (data) => data.data.results,
   });
 
-  return (<>
-  <Container className="mt-3">
-      <Row>
-          <h1 className="text-center mb-3">Top Rated Movies</h1>
-      {data
-            ?.map((item) => (
-              <Col key={item.id} xs={12} md={4} lg={3}>
-                <Card className="m-2">
-                  <Card.Img
-                    src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
-                    className="w-100"
-                  />
-                  <Card.Body>
-                    <Card.Title>{item.title}</Card.Title>
-                    <Card.Text>{item.release_date}</Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
-      </Row>
-  </Container>
-    
-  </>);
+  var settings = {
+    autoplay: true,
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 3,
+  };
+
+  return (
+    <>
+      <Container className="mt-3">
+        <Row>
+          <Col className=" border border-warning align-self-start mt-5" xs={3}>
+            <SortFilter />
+          </Col>
+          <Col xs={9}>
+            <h1 className="text-center ">Top Rated Movies</h1>
+            <Slider {...settings}>
+              {data?.map((item) => (
+                <Col key={item.id} xs={12} md={4} lg={3}>
+                  <MovieCard item={item} />
+                </Col>
+              ))}
+            </Slider>
+          </Col>
+        </Row>
+      </Container>
+    </>
+  );
 }

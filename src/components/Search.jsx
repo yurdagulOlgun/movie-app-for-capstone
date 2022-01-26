@@ -19,7 +19,7 @@ function Search(props) {
           id="search"
           onChange={inputHandler}
           defaultValue={q}
-          placeholder="search movies by name"
+          placeholder="search movies by title"
         />
       </div>
     </>
