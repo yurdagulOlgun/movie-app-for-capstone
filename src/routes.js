@@ -7,11 +7,11 @@ import TopRated from "./components/pages/TopRated"
 
 const routes = [
   {title:"Home", path:"/", element:Home},
-  {title:"About", path:"about", element:About},
+  {title:"About", path:"/about", element:About},
   {title:"Profile", path:"profile", element:Profile},
   {title:"MovieDetail", path:"/:movieId", element:MovieDetail},
-  {title:"Popular", path:"popular", element: Popular},
-  {title:"Top Rated", path:"top-rated", element: TopRated}
+  {title:"Popular", path:"/popular", element: Popular},
+  {title:"Top Rated", path:"/top-rated", element: TopRated}
 ]
 
 export default routes;

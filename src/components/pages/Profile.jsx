@@ -1,7 +1,14 @@
+import { useSelector } from "react-redux"
+import MovieCard from "../MovieCard"
+
 export default function Profile (props) {
+    const user = useSelector((state) => state)
+    console.log(user);
     return (
         <><br />
-            <h1>Profile</h1>
+            {
+                user?.user?.map((item,index) => <MovieCard key={index} item={item}/>)
+            }
         </>
     )
 }

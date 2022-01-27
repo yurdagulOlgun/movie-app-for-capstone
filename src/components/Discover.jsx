@@ -4,6 +4,7 @@ import { Col } from "react-bootstrap";
 import Slider from "react-slick";
 import MovieCard from "./MovieCard";
 
+
 export default function Discover() {
   const { data } = useQuery("movies", fetchDiscoverMovies, {
     retry: false,

@@ -12,6 +12,7 @@ export default function TopRated() {
   });
 
   var settings = {
+    arrows: false,
     autoplay: true,
     dots: true,
     infinite: true,
