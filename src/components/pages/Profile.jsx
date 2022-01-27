@@ -1,14 +1,22 @@
-import { useSelector } from "react-redux"
-import MovieCard from "../MovieCard"
+import { useSelector } from "react-redux";
+import MovieCard from "../MovieCard";
+import { Col, Container, Row } from "react-bootstrap";
 
-export default function Profile (props) {
-    const user = useSelector((state) => state)
-    console.log(user);
-    return (
-        <><br />
-            {
-                user?.user?.map((item,index) => <MovieCard key={index} item={item}/>)
-            }
-        </>
-    )
+export default function Profile(props) {
+  const user = useSelector((state) => state);
+
+  return (
+    <>
+      <Container>
+        <Row className="mt-5">
+          <h1>Favorites</h1>
+          {user?.user?.map((item, index) => (
+            <Col key={index} xs={12} md={4} lg={3}>
+              <MovieCard item={item} />
+            </Col>
+          ))}
+        </Row>
+      </Container>
+    </>
+  );
 }
