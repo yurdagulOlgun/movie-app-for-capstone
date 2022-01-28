@@ -2,13 +2,18 @@ import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { addFavorite, removeFavorite } from "../reduxStore/user";
-
+import { addFavorite, addSeenList, removeFavorite, removeSeenList } from "../reduxStore/user";
+import { IoVideocam, IoVideocamOutline } from "react-icons/io5";
 
 export default function MovieCard({ item }) {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state);
-  const isFav = user?.some((fav) => fav.id === item.id);
+  // const { seen } = useSelector((state) => state);
+
+  const isFav = user?.favoriteList?.favoriteFilms?.some((fav) => fav.id === item.id);
+  const isWatch = user?.seenList?.seenFilms?.some((watch) => watch.id === item.id) 
+
+  
 
   return (
     <>
@@ -41,7 +46,21 @@ export default function MovieCard({ item }) {
               )
             }
           />
+
         )}
+        {
+          isWatch ? ( <IoVideocam onClick={() => dispatch(removeSeenList(item.id))} /> ) :
+          ( <IoVideocamOutline  onClick={() =>
+            dispatch(
+              addSeenList(
+                item.id,
+                item.title,
+                item.poster_path,
+                item.release_date
+              )
+            )
+          }/> )
+        }
       </Card>
     </>
   );
