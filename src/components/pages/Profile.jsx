@@ -2,8 +2,10 @@ import { useSelector } from "react-redux";
 import MovieCard from "../MovieCard";
 import { Col, Container, Row } from "react-bootstrap";
 
-export default function Profile(props) {
+
+export default function Profile({item}) {
   const user = useSelector((state) => state);
+
 
   return (
     <>
