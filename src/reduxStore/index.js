@@ -2,10 +2,12 @@ import { combineReducers, createStore } from "redux";
 import {persistStore, persistReducer} from "redux-persist";
 import storage
  from "redux-persist/lib/storage";
-import userReducer from "./user";
+import favoriteReducer from "./favorite";
+import seenReducer from "./seenList";
 
 const rootReducer= combineReducers({
-    user:userReducer,
+    favorites:favoriteReducer,
+    seenList: seenReducer,
 })
 
 const persistConfig = {

@@ -2,17 +2,22 @@ import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { addFavorite, addSeenList, removeFavorite, removeSeenList } from "../reduxStore/user";
+import { addFavorite, removeFavorite } from "../reduxStore/favorite";
+import { addSeenList, removeSeenList } from "../reduxStore/seenList";
 import { IoVideocam, IoVideocamOutline } from "react-icons/io5";
 
 export default function MovieCard({ item }) {
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state);
-  // const { seen } = useSelector((state) => state);
+  const { favorites } = useSelector((state) => state);
+  const {seenList} = useSelector((state) => state);
 
-  const isFav = user?.favoriteList?.favoriteFilms?.some((fav) => fav.id === item.id);
-  const isWatch = user?.seenList?.seenFilms?.some((watch) => watch.id === item.id) 
+  const isFav = favorites?.films?.some((fav) => (fav.id === item.id));
+  const isWatch = seenList?.seenFilms?.some((watch) => watch.id === item.id) 
+  
 
+ 
+  // console.log("fav:::",isFav);
+  // console.log("watch:::",isWatch);
   
 
   return (

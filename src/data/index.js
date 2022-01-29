@@ -16,4 +16,3 @@ export const fetchReviews = (movieId) => BASE_AXIOS.get(`/movie/${movieId}/revie
 export const fetchRecommendations = (movieId) => BASE_AXIOS.get(`/movie/${movieId}/recommendations?api_key=${API_KEY}`);
 
 
-
