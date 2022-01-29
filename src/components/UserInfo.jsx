@@ -2,32 +2,33 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Card } from "react-bootstrap";
 import { FiInstagram, FiTwitter } from "react-icons/fi";
-// import { useSelector } from "react-redux";
-// import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+
 
 export default function UserInfo() {
-  // const {login} = useSelector((state) => state)
-  // const dispatch = useDispatch()
+  const {login, favorites, seenList} = useSelector((state) => state)
+ 
   return (
     <>
       <UserCard>
         <UserCardImg
           src="https://data.whicdn.com/images/324294713/original.png"
-          className="w-50"
+          
         />
         <UserCardBody>
-          <Card.Title>username</Card.Title>
-          <Card.Text>seenlist</Card.Text>
+          <Card.Title>{login.username}</Card.Title>
+          <CardText>seen list: {seenList.count}</CardText>
+          <CardText>favlist: {favorites.count}</CardText>
         </UserCardBody>
         <UserCardBody>
-          <Card.Title>joindate</Card.Title>
-          <Card.Text>favlist</Card.Text>
+          <CardText>{login.joinDate}</CardText>
+          
         </UserCardBody>
         <SocialDiv>
-          <SocialLink to=" ">
+          <SocialLink to={`${login.socials.instagram}`}>
             <FiInstagram />
           </SocialLink>
-          <SocialLink to=" ">
+          <SocialLink to={`${login.socials.twitter}`}>
             <FiTwitter />
           </SocialLink>
         </SocialDiv>
@@ -43,14 +44,19 @@ const UserCard = styled(Card)`
 `;
 
 const UserCardImg = styled(Card.Img)`
-  border: 2px solid darkgray;
+  border: 0;
   border-radius: 200px;
+  width: 40%;
 `;
 
 const UserCardBody = styled(Card.Body)`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+`;
+
+const CardText = styled(Card.Text)`
+  font-size: 0.8rem;
 `;
 
 const SocialLink = styled(Link)`

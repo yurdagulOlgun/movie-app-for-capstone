@@ -4,12 +4,12 @@ import storage
  from "redux-persist/lib/storage";
 import favoriteReducer from "./favorite";
 import seenReducer from "./seenList";
-import logingReducer from "./user";
+import loginReducer from "./user";
 
 const rootReducer= combineReducers({
     favorites:favoriteReducer,
     seenList: seenReducer,
-    login: logingReducer,
+    login: loginReducer,
 })
 
 const persistConfig = {

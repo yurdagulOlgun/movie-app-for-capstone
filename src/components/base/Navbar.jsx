@@ -2,34 +2,48 @@ import React, { useContext, useState } from "react";
 import styled from "styled-components";
 // import { ThemeContext } from "../context/ThemeContext";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 const Navbar = () => {
   //   const { theme } = useContext(ThemeContext);
+  const [profileHidden, setProfileHidden] = useState(true);
   const [hidden, setHidden] = useState(true);
+  const { login } = useSelector((state) => state);
+
+//  if (login?.login) {
+//    document.getElementById("profile").display = false
+//  } else {
+//   document.getElementById("profile").display = true
+//  }
+
   return (
     <>
       <Nav>
         <Menu>
-          <MenuLink href="/" >
-            Home
-          </MenuLink>
-          <MenuLink href="/about" >
-            About
-          </MenuLink>
-          <MenuLink dropdownToggle onClick={() => setHidden(!hidden)} >
+          <MenuLink href="/">Home</MenuLink>
+          <MenuLink href="/about">About</MenuLink>
+          <MenuLink dropdownToggle onClick={() => setHidden(!hidden)}>
             Movies
           </MenuLink>
-          <MenuLink href="/popular" hidden={hidden} toggle={() => setHidden(!hidden)} >
+          <MenuLink
+            href="/popular"
+            hidden={hidden}
+            toggle={() => setHidden(!hidden)}
+          >
             Popular
           </MenuLink>
           <MenuLink
             href="/top-rated"
             hidden={hidden}
             toggle={() => setHidden(!hidden)}
-            
           >
             Top Rated
-          </MenuLink> 
-          <StyledLink to="/profile" >
+          </MenuLink>
+          <StyledLink to="/login">Login</StyledLink>
+          <StyledLink
+            to="/profile"
+            id="profile"
+          >
             Profile
           </StyledLink>
         </Menu>
@@ -39,7 +53,6 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
 
 const StyledLink = styled(Link)`
   padding: 1rem 2rem;
