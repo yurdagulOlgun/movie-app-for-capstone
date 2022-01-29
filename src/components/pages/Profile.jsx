@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import MovieCard from "../MovieCard";
 import { Col, Container, Row } from "react-bootstrap";
+import UserInfo from "../UserInfo";
 
 
 export default function Profile() {
@@ -10,7 +11,13 @@ export default function Profile() {
 
   return (
     <>
-      <Container>
+      <Container className="mt-5">
+        <Row>
+          <Col xs={9} md={5} lg={4}>
+            <UserInfo/>
+          </Col>
+          
+        </Row>
         <Row className="mt-5">
           <h1>Favorites</h1>
           {favorites?.films?.map((item, index) => (
