@@ -14,7 +14,6 @@ export default function TopRated() {
 
   const { filtered } = useSelector((state) => state);
 
- 
   var settings = {
     arrows: false,
     autoplay: true,
@@ -25,17 +24,28 @@ export default function TopRated() {
     slidesToScroll: 3,
   };
 
-  console.log("lalalalalalalla:::", filtered);
+  if (filtered[0]?.length > 0) {
+    return <Container className="mt-3">
+      <Row>
+        <Col className=" border border-warning align-self-start mt-5" xs={3}>
+          <SortFilter />
+        </Col>
+        <Col xs={9}>
+          <h1 className="text-center  ">Popular Movies</h1>
+          <Slider {...settings}>
+          {filtered[0]?.map((item, i) => (
+            <Col key={i} xs={12} md={4} lg={3}>
+              <MovieCard item={item} />
+            </Col>
+          ))}
+          </Slider>
+        </Col>
+      </Row>
+    </Container>;
+  }
 
   return (
     <>
-    {
-      filtered?.map((item) => (
-        <Col key={item.id} xs={12} md={4} lg={3}>
-          <MovieCard item={item} />
-        </Col>
-      ))
-    }
       <Container className="mt-3">
         <Row>
           <Col className=" border border-warning align-self-start mt-5" xs={3}>

@@ -16,13 +16,6 @@ export default function SortFilter() {
       select: (data) => data.data.results,
     });
 
-    
-//  function clickHandler(){
-//     dispatch()
-//   }
-
-
-
   return (
     <>
       <DropdownButton
@@ -82,29 +75,36 @@ export default function SortFilter() {
         >
           Adventure
         </Button>
-        <Button className="m-2" variant="warning">
+        <Button className="m-2" variant="warning" onClick={(e) => setGenre_id(e.target.value)}
+          value={35}>
           Comedy
         </Button>
       </ButtonGroup>
       <ButtonGroup size="sm">
-        <Button className="m-2" variant="warning">
+        <Button className="m-2" variant="warning" onClick={(e) => setGenre_id(e.target.value)}
+          value={10749}>
           Romance
         </Button>
-        <Button className="m-2" variant="warning">
+        <Button className="m-2" variant="warning" onClick={(e) => setGenre_id(e.target.value)}
+          value={18}>
           Drama
         </Button>
-        <Button className="m-2" variant="warning">
-          Comedy
+        <Button className="m-2" variant="warning" onClick={(e) => setGenre_id(e.target.value)}
+          value={80}>
+          Crime
         </Button>
       </ButtonGroup>
       <ButtonGroup size="sm">
-        <Button className="m-2" variant="warning">
+        <Button className="m-2" variant="warning" onClick={(e) => setGenre_id(e.target.value)}
+          value={27}>
           Horror
         </Button>
-        <Button className="m-2" variant="warning">
+        <Button className="m-2" variant="warning" onClick={(e) => setGenre_id(e.target.value)}
+          value={878}>
           Science Fiction
         </Button>
-        <Button className="m-2" variant="warning">
+        <Button className="m-2" variant="warning" onClick={(e) => setGenre_id(e.target.value)}
+          value={10752}>
           War
         </Button>
       </ButtonGroup>
