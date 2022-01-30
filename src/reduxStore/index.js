@@ -7,7 +7,7 @@ import seenReducer from "./seenList";
 import loginReducer from "./user";
 
 const rootReducer= combineReducers({
-    favorites:favoriteReducer,
+    favorites: favoriteReducer,
     seenList: seenReducer,
     login: loginReducer,
 })

@@ -8,16 +8,10 @@ import { IoVideocam, IoVideocamOutline } from "react-icons/io5";
 
 export default function MovieCard({ item }) {
   const dispatch = useDispatch();
-  const { favorites } = useSelector((state) => state);
-  const {seenList} = useSelector((state) => state);
+  const { favorites, seenList } = useSelector((state) => state);
 
   const isFav = favorites?.films?.some((fav) => (fav.id === item.id));
   const isWatch = seenList?.seenFilms?.some((watch) => watch.id === item.id) 
-  
-
- 
-  // console.log("fav:::",isFav);
-  // console.log("watch:::",isWatch);
   
 
   return (

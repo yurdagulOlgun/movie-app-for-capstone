@@ -8,10 +8,7 @@ import {
 
   export default function SortFilter(){
     const [value, setValue] = useState("");
-    const handleSelect = (e) => {
-      console.log(e);
-      setValue(e);
-    };
+
       return (
           <>
             <DropdownButton
@@ -19,7 +16,7 @@ import {
               alignRight
               title={`${value}` ? `${value}` : `sort by`}
               id="dropdown-menu-align-right"
-              onSelect={handleSelect}
+              onSelect={(e) => setValue(e)}
               className="mt-4"
             >
               <Dropdown.Item eventKey="A to Z by The Title ">

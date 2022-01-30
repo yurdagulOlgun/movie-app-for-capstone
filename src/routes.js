@@ -9,9 +9,8 @@ import TopRated from "./components/pages/TopRated"
 const routes = [
   {title:"Home", path:"/", element:Home},
   {title:"About", path:"/about", element:About},
-  {title:"Profile", path:"login/profile", element:Profile},
   {title:"Profile", path:"/profile", element:Profile},
-  {title:"Login", path:"login", element:Login},
+  {title:"Login", path:"/login", element:Login},
   {title:"MovieDetail", path:"/:movieId", element:MovieDetail},
   {title:"Popular", path:"/popular", element: Popular},
   {title:"Top Rated", path:"/top-rated", element: TopRated}
