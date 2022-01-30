@@ -4,6 +4,7 @@ import storage
  from "redux-persist/lib/storage";
 import favoriteReducer from "./favorite";
 import seenReducer from "./seenList";
+import filterReducer from "./sortFilter";
 import loginReducer from "./user";
 // import sortFilterReducer from "./sortFilter";
 
@@ -11,7 +12,7 @@ const rootReducer= combineReducers({
     favorites: favoriteReducer,
     seenList: seenReducer,
     login: loginReducer,
-    // sortFilter: sortFilterReducer,
+    filtered: filterReducer,
 })
 
 const persistConfig = {

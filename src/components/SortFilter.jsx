@@ -1,9 +1,27 @@
 import { Dropdown, DropdownButton, Button, ButtonGroup } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
+import { fetchSortMovies } from "../data";
+import { useDispatch } from "react-redux";
+import { addGenres } from "../reduxStore/sortFilter";
 
 export default function SortFilter() {
   const [value, setValue] = useState("");
   const [genre_id, setGenre_id] = useState("");
+  
+  const dispatch = useDispatch()
+
+  const { data } = useQuery(["sort movies ", genre_id], () => fetchSortMovies(genre_id), {
+      retry: false,
+      select: (data) => data.data.results,
+    });
+
+    
+//  function clickHandler(){
+//     dispatch()
+//   }
+
+
 
   return (
     <>
@@ -91,7 +109,7 @@ export default function SortFilter() {
         </Button>
       </ButtonGroup>
 
-      <Button className="m-2" variant="secondary" size="sm">
+      <Button className="m-2" variant="secondary" size="sm" onClick={() => dispatch(addGenres(data)) }>
         Search
       </Button>
     </>

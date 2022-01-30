@@ -4,7 +4,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import Slider from "react-slick";
 import SortFilter from "../SortFilter";
 import MovieCard from "../MovieCard";
-
+import { useSelector } from "react-redux";
 
 export default function TopRated() {
   const { data } = useQuery("movies", fetchPopularMovies, {
@@ -12,6 +12,9 @@ export default function TopRated() {
     select: (data) => data.data.results,
   });
 
+  const { filtered } = useSelector((state) => state);
+
+ 
   var settings = {
     arrows: false,
     autoplay: true,
@@ -22,12 +25,17 @@ export default function TopRated() {
     slidesToScroll: 3,
   };
 
-
-
-
+  console.log("lalalalalalalla:::", filtered);
 
   return (
     <>
+    {
+      filtered?.map((item) => (
+        <Col key={item.id} xs={12} md={4} lg={3}>
+          <MovieCard item={item} />
+        </Col>
+      ))
+    }
       <Container className="mt-3">
         <Row>
           <Col className=" border border-warning align-self-start mt-5" xs={3}>
