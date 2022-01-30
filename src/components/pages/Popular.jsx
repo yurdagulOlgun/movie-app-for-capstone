@@ -5,6 +5,7 @@ import Slider from "react-slick";
 import SortFilter from "../SortFilter";
 import MovieCard from "../MovieCard";
 
+
 export default function TopRated() {
   const { data } = useQuery("movies", fetchPopularMovies, {
     retry: false,
@@ -20,6 +21,10 @@ export default function TopRated() {
     slidesToShow: 3,
     slidesToScroll: 3,
   };
+
+
+
+
 
   return (
     <>

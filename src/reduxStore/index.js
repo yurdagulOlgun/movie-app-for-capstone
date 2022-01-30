@@ -5,11 +5,13 @@ import storage
 import favoriteReducer from "./favorite";
 import seenReducer from "./seenList";
 import loginReducer from "./user";
+// import sortFilterReducer from "./sortFilter";
 
 const rootReducer= combineReducers({
     favorites: favoriteReducer,
     seenList: seenReducer,
     login: loginReducer,
+    // sortFilter: sortFilterReducer,
 })
 
 const persistConfig = {
