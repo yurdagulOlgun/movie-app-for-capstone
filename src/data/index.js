@@ -12,11 +12,11 @@ export const fetchSearchMovies = (q) => BASE_AXIOS.get(`/search/movie?api_key=${
 export const fetchDiscoverMovies = () => BASE_AXIOS.get(`/discover/movie?api_key=${API_KEY}&page=1`);
 export const fetchTrendDayMovies = () => BASE_AXIOS.get(`/trending/all/day?api_key=${API_KEY}`);
 export const fetchTrendWeekMovies = () => BASE_AXIOS.get(`/trending/all/week?api_key=${API_KEY}`);
-export const fetchPopularMovies = () => BASE_AXIOS.get(`/movie/popular?api_key=${API_KEY}&page=1`);
+export const fetchPopularMovies = (page) => BASE_AXIOS.get(`/movie/popular?api_key=${API_KEY}&page=${page}`);
 export const fetchTopRatedMovies = () => BASE_AXIOS.get(`/movie/top_rated?api_key=${API_KEY}&page=1`);
 export const fetchDetail = (movieId) => BASE_AXIOS.get(`/movie/${movieId}?api_key=${API_KEY}`);
 export const fetchCast = (movieId) => BASE_AXIOS.get(`/movie/${movieId}/credits?api_key=${API_KEY}`);
 export const fetchReviews = (movieId) => BASE_AXIOS.get(`/movie/${movieId}/reviews?api_key=${API_KEY}`);
 export const fetchRecommendations = (movieId) => BASE_AXIOS.get(`/movie/${movieId}/recommendations?api_key=${API_KEY}`);
-export const fetchSortMovies = (genre_id) => BASE_AXIOS.get(`/movie/popular?api_key=${API_KEY}&release_date.lte=&release_date.gte=&with_genres=${genre_id}`)
+export const fetchSortMovies = (genre_id,sort ,dateFrom, dateTo) => BASE_AXIOS.get(`/movie/popular?api_key=${API_KEY}&sort_by=${sort}&release_date.lte=${dateTo}&release_date.gte=${dateFrom}&with_genres=${genre_id}`)
 

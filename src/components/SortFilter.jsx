@@ -1,61 +1,55 @@
-import { Dropdown, DropdownButton, Button, ButtonGroup } from "react-bootstrap";
-import { useEffect, useState } from "react";
-import { useQuery } from "react-query";
-import { fetchSortMovies } from "../data";
+import {  Button, ButtonGroup } from "react-bootstrap";
+import {  useEffect, useState } from "react";
+// import { useQuery } from "react-query";
+// import { fetchSortMovies } from "../data";
 import { useDispatch } from "react-redux";
 import { addGenres } from "../reduxStore/sortFilter";
 
 export default function SortFilter() {
-  const [value, setValue] = useState("");
   const [genre_id, setGenre_id] = useState("");
-  
+  const [sort, setSort] = useState("")
+  const [dateTo, setDateTo] = useState("")
+  const [dateFrom, setDateFrom] = useState("")
   const dispatch = useDispatch()
+  const [data, setData] = useState([])
 
-  const { data } = useQuery(["sort movies ", genre_id], () => fetchSortMovies(genre_id), {
-      retry: false,
-      select: (data) => data.data.results,
-    });
+  // const { data } = useQuery(["sort movies ", genre_id,sort,dateFrom,dateTo], () => fetchSortMovies(genre_id,sort,dateFrom,dateTo), {
+  //     retry: false,
+  //     select: (data) => data.data.results,
+  //   });
+
+  useEffect(() => {
+    fetch(`https://api.themoviedb.org/3/movie/popular?api_key=2d20344e6f6a87e7e2ad84a103865cd9&sort_by=${sort}&release_date.gte=${dateFrom}&release_date.lte=${dateTo}&with_genres=${genre_id}`)
+  .then(response => response.json())
+  .then(data => setData(data));
+
+  },[dateTo,dateFrom,sort,genre_id])
+
+  
+   console.log(dateTo,dateFrom,sort,genre_id);
+  //  console.log("filtresiz",data)
 
   return (
     <>
-      <DropdownButton
-        variant="warning"
-        alignRight
-        title={`${value}` ? `${value}` : `sort by`}
-        id="dropdown-menu-align-right"
-        onSelect={(e) => setValue(e)}
-        className="mt-4"
-      >
-        <Dropdown.Item eventKey="A to Z by The Title ">
-          A to Z by The Title
-        </Dropdown.Item>
-        <Dropdown.Item eventKey="Z to A by The Title ">
-          Z to A by The Title
-        </Dropdown.Item>
-        <Dropdown.Item eventKey="Increasing by Popularity">
-          Increasing by Popularity
-        </Dropdown.Item>
-        <Dropdown.Item eventKey="Decreasing by Popularity">
-          Decreasing by Popularity
-        </Dropdown.Item>
-        <Dropdown.Item eventKey="Increasing by Release Date">
-          Increasing by Release Date
-        </Dropdown.Item>
-        <Dropdown.Item eventKey="Decreasing by Release Date">
-          Decreasing by Release Date
-        </Dropdown.Item>
-      </DropdownButton>
-
+    <select className="form-select" aria-label="Default select example" onChange={(e) => setSort((e.target.options[e.target.selectedIndex].value))}>
+  <option disabled selected hidden>Sort By</option>
+  <option value="original_title.asc">A to Z by The Title</option>
+  <option value="original_title.desc">Z to A by The Title</option>
+  <option value="popularity.asc">Increasing by Popularity</option>
+  <option value="popularity.desc">Decreasing by Popularity</option>
+  <option value="release_date.gte">Increasing by Release Date</option>
+  <option value="release_date.lte">Decreasing by Release Date</option>
+</select>
       <div className=" d-flex flex-column">
         <h3 className="mt-3">Filter By</h3>
         <label htmlFor="text" className="mt-3">
           From:
         </label>
-        <input type="date" />
+        <input type="date" onChange={(e) => setDateTo(e.target.value)}/>
         <label htmlFor="text" className="mt-3">
           To:
         </label>
-        <input type="date" />
+        <input type="date"  onChange={(e) => setDateFrom(e.target.value)}/>
       </div>
 
       <ButtonGroup size="sm" className="mt-2">

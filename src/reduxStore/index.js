@@ -6,6 +6,7 @@ import favoriteReducer from "./favorite";
 import seenReducer from "./seenList";
 import filterReducer from "./sortFilter";
 import loginReducer from "./user";
+import loadMoreReducer from "./loadMore";
 // import sortFilterReducer from "./sortFilter";
 
 const rootReducer= combineReducers({
@@ -13,6 +14,7 @@ const rootReducer= combineReducers({
     seenList: seenReducer,
     login: loginReducer,
     filtered: filterReducer,
+    moreData: loadMoreReducer,
 })
 
 const persistConfig = {
