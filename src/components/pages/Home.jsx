@@ -19,8 +19,8 @@ export default function Home() {
     return (
       <>
         <Container>
-          <Row className="m-3 row justify-content-md-center">
-            <Col md={{ span: 12, offset: 6 }}>
+          <Row className=" row justify-content-md-center">
+            <Col md={{ span: 12, offset: 6 }} className="m-3">
               <Search q={q} setQ={setQ} />
             </Col>
           </Row>
@@ -45,9 +45,9 @@ export default function Home() {
   return (
     <>
       <Container>
-        <Row className="m-3 row justify-content-md-center">
-          <Col md={{ span: 12, offset: 6 }}>
-            <Search q={q} setQ={setQ} />
+        <Row className=" row justify-content-md-center">
+          <Col md={{ span: 12, offset: 6 }} className="m-3">
+            <Search q={q} setQ={setQ}  />
           </Col>
         </Row>
       </Container>

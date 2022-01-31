@@ -1,9 +1,8 @@
 import {  Button, ButtonGroup } from "react-bootstrap";
 import {  useEffect, useState } from "react";
-// import { useQuery } from "react-query";
-// import { fetchSortMovies } from "../data";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addGenres } from "../reduxStore/sortFilter";
+import styled from "styled-components";
 
 export default function SortFilter() {
   const [genre_id, setGenre_id] = useState("");
@@ -13,10 +12,10 @@ export default function SortFilter() {
   const dispatch = useDispatch()
   const [data, setData] = useState([])
 
-  // const { data } = useQuery(["sort movies ", genre_id,sort,dateFrom,dateTo], () => fetchSortMovies(genre_id,sort,dateFrom,dateTo), {
-  //     retry: false,
-  //     select: (data) => data.data.results,
-  //   });
+  const { changeTheme } = useSelector((state) => state);
+    const themeName = changeTheme ? "light" : "dark"
+
+
 
   useEffect(() => {
     fetch(`https://api.themoviedb.org/3/movie/popular?api_key=2d20344e6f6a87e7e2ad84a103865cd9&sort_by=${sort}&release_date.gte=${dateFrom}&release_date.lte=${dateTo}&with_genres=${genre_id}`)
@@ -26,13 +25,12 @@ export default function SortFilter() {
   },[dateTo,dateFrom,sort,genre_id])
 
   
-   console.log(dateTo,dateFrom,sort,genre_id);
-  //  console.log("filtresiz",data)
 
   return (
     <>
+    <ForStyled theme={themeName}>
     <select className="form-select" aria-label="Default select example" onChange={(e) => setSort((e.target.options[e.target.selectedIndex].value))}>
-  <option disabled selected hidden>Sort By</option>
+  <option hidden>Sort By</option>
   <option value="original_title.asc">A to Z by The Title</option>
   <option value="original_title.desc">Z to A by The Title</option>
   <option value="popularity.asc">Increasing by Popularity</option>
@@ -106,6 +104,14 @@ export default function SortFilter() {
       <Button className="m-2" variant="secondary" size="sm" onClick={() => dispatch(addGenres(data)) }>
         Search
       </Button>
+      </ForStyled>
     </>
   );
 }
+
+const ForStyled = styled.div`
+  background-color: ${({ theme }) => (theme === "light" ? "#FF5400" : "#390099")};
+  color: ${({ theme }) => (theme === "light" ? "#14213D": "#FCA311"  )};
+  padding: 0.8rem;
+  width: 110%;
+`;

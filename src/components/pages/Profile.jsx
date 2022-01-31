@@ -10,9 +10,9 @@ export default function Profile() {
 
   return (
     <>
-      <Container className="mt-5">
+      <Container >
         <Row>
-          <Col xs={12} md={9} lg={6}>
+          <Col xs={12} md={9} lg={6} className="mt-5">
             <UserInfo/>
           </Col>
           

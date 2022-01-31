@@ -27,8 +27,8 @@ export default function Login() {
   }
   return (
     <>
-      <LoginContainer className="mt-5 ">
-        <FormBox onSubmit={handleSubmit}>
+      <LoginContainer >
+        <FormBox onSubmit={handleSubmit} className="mt-5 ">
           <Icon src="https://cdn-icons-png.flaticon.com/512/4221/4221419.png" />
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>username</Form.Label>

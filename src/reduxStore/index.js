@@ -7,7 +7,7 @@ import seenReducer from "./seenList";
 import filterReducer from "./sortFilter";
 import loginReducer from "./user";
 import loadMoreReducer from "./loadMore";
-// import sortFilterReducer from "./sortFilter";
+import changeThemeReducer from "./themeChanger";
 
 const rootReducer= combineReducers({
     favorites: favoriteReducer,
@@ -15,6 +15,7 @@ const rootReducer= combineReducers({
     login: loginReducer,
     filtered: filterReducer,
     moreData: loadMoreReducer,
+    changeTheme: changeThemeReducer,
 })
 
 const persistConfig = {

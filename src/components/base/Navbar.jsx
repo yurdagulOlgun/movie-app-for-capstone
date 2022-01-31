@@ -1,34 +1,39 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-// import { ThemeContext } from "../context/ThemeContext";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Button } from "react-bootstrap";
+import { BiToggleLeft, BiToggleRight } from "react-icons/bi";
+import { changeThemeAction } from "../../reduxStore/themeChanger";
 
 const Navbar = () => {
-  //   const { theme } = useContext(ThemeContext);
-  const [profileHidden, setProfileHidden] = useState(true);
+  const [theme, setTheme] = useState("light");
   const [hidden, setHidden] = useState(true);
-  const { login } = useSelector((state) => state);
+  const dispatch = useDispatch();
+  const { changeTheme } = useSelector((state) => state);
+  const themeName = changeTheme ? "light" : "dark"
 
-//  if (login?.login) {
-//    document.getElementById("profile").display = false
-//  } else {
-//   document.getElementById("profile").display = true
-//  }
-
+  function clickHandler(event) {
+    if (event.target.id === "themebutton") {
+    }
+    setTheme(!theme);
+    dispatch(changeThemeAction(theme));
+  }
+  console.log("themeName",themeName);
   return (
-    <>
-      <Nav>
-        <Menu>
-          <MenuLink href="/">Home</MenuLink>
-          <MenuLink href="/about">About</MenuLink>
-          <MenuLink dropdownToggle onClick={() => setHidden(!hidden)}>
+    
+      <Nav theme={themeName}>
+        <Menu  theme={themeName}>
+          <MenuLink href="/"  theme={themeName}>Home</MenuLink>
+          <MenuLink href="/about"  theme={themeName}>About</MenuLink>
+          <MenuLink dropdownToggle onClick={() => setHidden(!hidden)}  theme={themeName}>
             Movies
           </MenuLink>
           <MenuLink
             href="/popular"
             hidden={hidden}
             toggle={() => setHidden(!hidden)}
+            theme={themeName}
           >
             Popular
           </MenuLink>
@@ -36,19 +41,30 @@ const Navbar = () => {
             href="/top-rated"
             hidden={hidden}
             toggle={() => setHidden(!hidden)}
+            theme={themeName}
           >
             Top Rated
           </MenuLink>
-          <StyledLink to="/login">Login</StyledLink>
+          <StyledLink to="/login"  theme={themeName}>Login</StyledLink>
           <StyledLink
             to="/profile"
             id="profile"
+            theme={themeName}
           >
             Profile
           </StyledLink>
+          
         </Menu>
+        <ThemeButton
+            id="themebutton"
+            variant="outline"
+            onClick={clickHandler}
+            theme={themeName}
+          >
+            {theme ? <BiToggleRight /> :<BiToggleLeft/>  }
+          </ThemeButton>
       </Nav>
-    </>
+    
   );
 };
 
@@ -59,12 +75,12 @@ const StyledLink = styled(Link)`
   cursor: pointer;
   text-align: center;
   text-decoration: none;
-  color: black;
+  color: ${(props) => (props.theme === "light" ? "#14213D" : "#FCA311")};
   transition: all 0.3s ease-in;
   font-size: 0.9rem;
 
   &:hover {
-    color: #ffc900;
+    color: ${({ theme }) => (theme === "light" ? "#FF5400" : "#390099")};
   }
 `;
 
@@ -73,12 +89,12 @@ const MenuLink = styled.a`
   cursor: pointer;
   text-align: center;
   text-decoration: none;
-  color: black;
+  color: ${({ theme }) => (theme === "light" ? "#14213D" : "#FCA311")};
   transition: all 0.3s ease-in;
   font-size: 0.9rem;
 
   &:hover {
-    color: #ffc900;
+    color:  ${({ theme }) => (theme === "light" ? "#FF5400" : "#390099")};
   }
 `;
 
@@ -88,11 +104,13 @@ const Nav = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  background: white;
+  background-color: ${({ theme }) => (theme === "light" ? "#FFBD00" : "#9E0059")};
+
   position: relative;
   top: 0;
   left: 0;
   right: 0;
+  bottom: 0;
 `;
 
 const Menu = styled.div`
@@ -100,4 +118,11 @@ const Menu = styled.div`
   justify-content: space-between;
   align-items: center;
   position: relative;
+`;
+
+const ThemeButton = styled(Button)`
+  
+  color: ${({ theme }) => (theme === "light" ? "#14213D" : "#FCA311")}; 
+  border: 0;
+  padding: 0;
 `;
