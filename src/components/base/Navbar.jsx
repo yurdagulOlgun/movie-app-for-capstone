@@ -10,8 +10,8 @@ const Navbar = () => {
   const [theme, setTheme] = useState("light");
   const [hidden, setHidden] = useState(true);
   const dispatch = useDispatch();
-  const { changeTheme } = useSelector((state) => state);
-  const themeName = changeTheme ? "light" : "dark"
+  const { changeTheme, login } = useSelector((state) => state);
+  const themeName = changeTheme ? "light" : "dark";
 
   function clickHandler(event) {
     if (event.target.id === "themebutton") {
@@ -19,52 +19,59 @@ const Navbar = () => {
     setTheme(!theme);
     dispatch(changeThemeAction(theme));
   }
-  console.log("themeName",themeName);
   return (
-    
-      <Nav theme={themeName}>
-        <Menu  theme={themeName}>
-          <MenuLink href="/"  theme={themeName}>Home</MenuLink>
-          <MenuLink href="/about"  theme={themeName}>About</MenuLink>
-          <MenuLink dropdownToggle onClick={() => setHidden(!hidden)}  theme={themeName}>
-            Movies
-          </MenuLink>
-          <MenuLink
-            href="/popular"
-            hidden={hidden}
-            toggle={() => setHidden(!hidden)}
-            theme={themeName}
-          >
-            Popular
-          </MenuLink>
-          <MenuLink
-            href="/top-rated"
-            hidden={hidden}
-            toggle={() => setHidden(!hidden)}
-            theme={themeName}
-          >
-            Top Rated
-          </MenuLink>
-          <StyledLink to="/login"  theme={themeName}>Login</StyledLink>
-          <StyledLink
-            to="/profile"
-            id="profile"
-            theme={themeName}
-          >
+    <Nav theme={themeName}>
+      <Menu theme={themeName}>
+        <MenuLink href="/" theme={themeName}>
+          Home
+        </MenuLink>
+        <MenuLink href="/about" theme={themeName}>
+          About
+        </MenuLink>
+        <MenuLink
+          dropdownToggle
+          onClick={() => setHidden(!hidden)}
+          theme={themeName}
+        >
+          Movies
+        </MenuLink>
+        <MenuLink
+          href="/popular"
+          hidden={hidden}
+          toggle={() => setHidden(!hidden)}
+          theme={themeName}
+        >
+          Popular
+        </MenuLink>
+        <MenuLink
+          href="/top-rated"
+          hidden={hidden}
+          toggle={() => setHidden(!hidden)}
+          theme={themeName}
+        >
+          Top Rated
+        </MenuLink>
+        <StyledLink to="/login" theme={themeName}>
+          Login
+        </StyledLink>
+        {login?.login && (
+          <StyledLink to="/profile" theme={themeName}>
             Profile
           </StyledLink>
-          
-        </Menu>
+        )}
+      </Menu>
+      <Menu2>
+        {login?.login && <UserIcon src={`${login.avatarUrl}`} />}
         <ThemeButton
-            id="themebutton"
-            variant="outline"
-            onClick={clickHandler}
-            theme={themeName}
-          >
-            {theme ? <BiToggleRight /> :<BiToggleLeft/>  }
-          </ThemeButton>
-      </Nav>
-    
+          id="themebutton"
+          variant="outline"
+          onClick={clickHandler}
+          theme={themeName}
+        >
+          {theme ? <BiToggleRight /> : <BiToggleLeft />}
+        </ThemeButton>
+      </Menu2>
+    </Nav>
   );
 };
 
@@ -94,7 +101,7 @@ const MenuLink = styled.a`
   font-size: 0.9rem;
 
   &:hover {
-    color:  ${({ theme }) => (theme === "light" ? "#FF5400" : "#390099")};
+    color: ${({ theme }) => (theme === "light" ? "#FF5400" : "#390099")};
   }
 `;
 
@@ -103,8 +110,9 @@ const Nav = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  background-color: ${({ theme }) => (theme === "light" ? "#FFBD00" : "#9E0059")};
+  flex-wrap: nowrap;
+  background-color: ${({ theme }) =>
+    theme === "light" ? "#FFBD00" : "#9E0059"};
 
   position: relative;
   top: 0;
@@ -121,8 +129,21 @@ const Menu = styled.div`
 `;
 
 const ThemeButton = styled(Button)`
-  
-  color: ${({ theme }) => (theme === "light" ? "#14213D" : "#FCA311")}; 
+  display: flex;
+  color: ${({ theme }) => (theme === "light" ? "#14213D" : "#FCA311")};
   border: 0;
   padding: 0;
+`;
+
+const UserIcon = styled.img`
+  padding: 6px;
+  width: 10%;
+  margin-left: 0;
+`;
+
+const Menu2 = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
 `;

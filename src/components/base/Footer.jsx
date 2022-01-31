@@ -10,21 +10,21 @@ export default function Footer (props) {
     return (
         <>
         <FooterStyle theme={themeName}>
-            <footer class="pt-4  pt-md-5 border-top">
-    <div class="row">
-      <div class="col-12 col-md">
-        <h5 class="d-block mb-3 ">© Yurdagül OLGUN</h5>
+            <footer className="pt-4  pt-md-5 border-top">
+    <div className="row">
+      <div className="col-12 col-md">
+        <h5 className="d-block mb-3 ">© Yurdagül OLGUN</h5>
       </div>
-      <div class="col-12 col-md">
-        <h5 class="d-block mb-3 "> Feb-2022</h5>
+      <div className="col-12 col-md">
+        <h5 className="d-block mb-3 "> Feb-2022</h5>
       </div>
-      <div class="col-6 col-md">
+      <div className="col-6 col-md">
         <h5>Features</h5>
       </div>
-      <div class="col-6 col-md">
+      <div className="col-6 col-md">
         <h5>Resources</h5>
       </div>
-      <div class="col-6 col-md">
+      <div className="col-6 col-md">
         <h5>About</h5>
       </div>
     </div>
