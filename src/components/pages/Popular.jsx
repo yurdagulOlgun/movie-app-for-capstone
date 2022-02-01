@@ -3,14 +3,11 @@ import { fetchPopularMovies } from "../../data";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import SortFilter from "../SortFilter";
 import MovieCard from "../MovieCard";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useState } from "react";
-// import { loadMoreData } from "../../reduxStore/loadMore";
 
 export default function TopRated() {
   const [page, setPage] = useState(1);
-  const dispatch = useDispatch();
-  // const { moreData } = useSelector((state) => state);
   const { filtered } = useSelector((state) => state);
 
   const { data } = useQuery(["movies", page], () => fetchPopularMovies(page), {
@@ -18,22 +15,8 @@ export default function TopRated() {
     select: (data) => data.data.results,
   });
 
-  function loadMoreMovies(event) {
+  function loadMoreMovies() {
     setPage(page + 1);
-
-    // dispatch(loadMoreData(data));
-    // return (
-    //   <>
-    //     {moreData[0]
-    //       ?.map((item, i) => (
-    //         <Col key={i} xs={12} md={3} lg={2}>
-    //           <MovieCard item={item} />
-    //         </Col>
-    //       ))
-    //       .slice(0, 4)
-    //       }
-    //   </>
-    // );
   }
 
   if (filtered[0]?.results?.length > 0) {

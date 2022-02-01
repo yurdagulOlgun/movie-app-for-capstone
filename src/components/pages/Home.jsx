@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import { useRef, useState } from "react";
 import Search from "../Search";
-import { Button, Col, Container, Row} from "react-bootstrap";
+import { Col, Container, Row} from "react-bootstrap";
 import Discover from "../Discover";
 import Trending from "../Trending";
 import { fetchSearchMovies } from "../../data";
