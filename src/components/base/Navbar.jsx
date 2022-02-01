@@ -26,9 +26,6 @@ const Navbar = () => {
         <MenuLink href="/" theme={themeName}>
           Home
         </MenuLink>
-        <MenuLink href="/about" theme={themeName}>
-          About
-        </MenuLink>
         <MenuLink
           dropdownToggle
           onClick={() => setHidden(!hidden)}

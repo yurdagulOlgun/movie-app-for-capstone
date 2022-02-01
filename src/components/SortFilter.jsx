@@ -1,7 +1,7 @@
 import { Button, ButtonGroup } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addGenres } from "../reduxStore/sortFilter";
+import { addGenres, removeFilter } from "../reduxStore/sortFilter";
 import styled from "styled-components";
 
 export default function SortFilter({ page }) {
@@ -20,8 +20,12 @@ export default function SortFilter({ page }) {
       `https://api.themoviedb.org/3/movie/popular?api_key=2d20344e6f6a87e7e2ad84a103865cd9&sort_by=${sort}&release_date.gte=${dateFrom}&release_date.lte=${dateTo}&with_genres=${genre_id}&page=${page}`
     )
       .then((response) => response.json())
-      .then((data) => setData(data));
+      .then((data) => {
+        setData(data)
+      });
   }, [dateTo, dateFrom, sort, genre_id, page]);
+ 
+
 
   return (
     <>
@@ -141,6 +145,16 @@ export default function SortFilter({ page }) {
           }}
         >
           Search
+        </Button>
+        <Button
+          className="m-2"
+          variant="danger"
+          size="sm"
+          onClick={() => {
+            dispatch(removeFilter(data));
+          }}
+        >
+          Reset
         </Button>
       </ForStyled>
     </>
