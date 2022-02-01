@@ -15,13 +15,13 @@ export default function Login() {
   const { login } = useSelector((state) => state);
 
   const navigate = useNavigate();
-  console.log(login.login);
 
   useEffect(() => {
     if (login?.login) {
       navigate("/");
     }
   }, [navigate, login]);
+  
   function handleSubmit(event) {
     event.preventDefault();
   }

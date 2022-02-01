@@ -5,11 +5,10 @@ import SortFilter from "../SortFilter";
 import MovieCard from "../MovieCard";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { loadMoreData } from "../../reduxStore/loadMore";
+// import { loadMoreData } from "../../reduxStore/loadMore";
 
 export default function TopRated() {
   const [page, setPage] = useState(1);
-  const [moreData, setMoreData] = useState(4)
   const dispatch = useDispatch();
   // const { moreData } = useSelector((state) => state);
   const { filtered } = useSelector((state) => state);
@@ -20,42 +19,47 @@ export default function TopRated() {
   });
 
   function loadMoreMovies(event) {
+    setPage(page + 1);
 
-      setPage(page + 1);
-      setMoreData(moreData+4)
-      // dispatch(loadMoreData(data));
-      // return (
-      //   <>
-      //     {moreData[0]
-      //       ?.map((item, i) => (
-      //         <Col key={i} xs={12} md={3} lg={2}>
-      //           <MovieCard item={item} />
-      //         </Col>
-      //       ))
-      //       .slice(0, 4)
-      //       }
-      //   </>
-      // );
+    // dispatch(loadMoreData(data));
+    // return (
+    //   <>
+    //     {moreData[0]
+    //       ?.map((item, i) => (
+    //         <Col key={i} xs={12} md={3} lg={2}>
+    //           <MovieCard item={item} />
+    //         </Col>
+    //       ))
+    //       .slice(0, 4)
+    //       }
+    //   </>
+    // );
   }
 
   if (filtered[0]?.results?.length > 0) {
     return (
       <Container>
         <Row>
-          <Col className=" align-self-start mt-5" xs={3}>
+          <Col className=" align-self-start mt-5 mx-3" xs={3}>
             <SortFilter page={page} />
           </Col>
           <Col>
             <Row>
               <h1 className="text-center  ">Popular Movies</h1>
-              {filtered[0]?.results?.map((item, i) => (
-                <Col key={i} xs={12} md={4} lg={3}>
-                  <MovieCard item={item} />
-                </Col>
-              )).slice(0, 4)}
-              
+              {filtered[0]?.results
+                ?.map((item, i) => (
+                  <Col key={i} xs={12} md={4} lg={3}>
+                    <MovieCard item={item} />
+                  </Col>
+                ))
+                .slice(0, 4)}
             </Row>
-            <Button id="loadmorebutton" className="m-3" variant="secondary" onClick={loadMoreMovies}>
+            <Button
+              id="loadmorebutton"
+              className="m-3"
+              variant="secondary"
+              onClick={loadMoreMovies}
+            >
               Load More
             </Button>
           </Col>
@@ -68,23 +72,28 @@ export default function TopRated() {
     <>
       <Container>
         <Row>
-          <Col className="align-self-start mt-5" xs={3}>
-            <SortFilter page={page}/>
+          <Col className="align-self-start mt-5 mx-3" xs={3}>
+            <SortFilter page={page} />
           </Col>
-          <Col >
+          <Col>
             <Row>
-          <h1 className="text-center  ">Popular Movies</h1>
-          {data
-            ?.map((item, i) => (
-              <Col key={i} xs={12} md={4} lg={3}>
-                <MovieCard item={item} />
-              </Col>
-            ))
-            .slice(0, 4)}
-          
-          </Row><Button id="loadmorebutton" className="m-3" variant="secondary" onClick={loadMoreMovies}>
-            Load More
-          </Button>
+              <h1 className="text-center  ">Popular Movies</h1>
+              {data
+                ?.map((item, i) => (
+                  <Col key={i} xs={12} md={4} lg={3}>
+                    <MovieCard item={item} />
+                  </Col>
+                ))
+                .slice(0, 4)}
+            </Row>
+            <Button
+              id="loadmorebutton"
+              className="m-3"
+              variant="secondary"
+              onClick={loadMoreMovies}
+            >
+              Load More
+            </Button>
           </Col>
         </Row>
       </Container>

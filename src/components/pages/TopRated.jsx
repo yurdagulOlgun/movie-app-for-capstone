@@ -1,42 +1,97 @@
 import { useQuery } from "react-query";
 import { fetchTopRatedMovies } from "../../data";
-import { Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import SortFilter from "../SortFilter";
-import Slider from "react-slick";
 import MovieCard from "../MovieCard";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+
 
 export default function TopRated() {
-  const { data } = useQuery("movies", fetchTopRatedMovies, {
+  const { filtered } = useSelector((state) => state);
+  const [page, setPage] = useState(1);
+
+  const { data } = useQuery(["movies", page], () => fetchTopRatedMovies(page), {
     retry: false,
     select: (data) => data.data.results,
   });
 
-  var settings = {
-    arrows: false,
-    autoplay: true,
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 3,
-  };
+  function loadMoreMovies(event) {
+    setPage(page + 1);
+
+    // dispatch(loadMoreData(data));
+    // return (
+    //   <>
+    //     {moreData[0]
+    //       ?.map((item, i) => (
+    //         <Col key={i} xs={12} md={3} lg={2}>
+    //           <MovieCard item={item} />
+    //         </Col>
+    //       ))
+    //       .slice(0, 4)
+    //       }
+    //   </>
+    // );
+  }
+
+  if (filtered[0]?.results?.length > 0) {
+    return (
+      <Container>
+        <Row>
+          <Col className=" align-self-start mt-5 mx-3" xs={3}>
+            <SortFilter page={page} />
+          </Col>
+          <Col>
+            <Row>
+              <h1 className="text-center  ">Top-Rated Movies</h1>
+              {filtered[0]?.results
+                ?.map((item, i) => (
+                  <Col key={i} xs={12} md={4} lg={3}>
+                    <MovieCard item={item} />
+                  </Col>
+                ))
+                .slice(0, 4)}
+            </Row>
+            <Button
+              id="loadmorebutton"
+              className="m-3"
+              variant="secondary"
+              onClick={loadMoreMovies}
+            >
+              Load More
+            </Button>
+          </Col>
+        </Row>
+      </Container>
+    );
+  }
 
   return (
     <>
-      <Container className="mt-3">
+      <Container>
         <Row>
-          <Col className=" border border-warning align-self-start mt-5" xs={3}>
-            <SortFilter />
+          <Col className="align-self-start mt-5 mx-3" xs={3}>
+            <SortFilter page={page} />
           </Col>
-          <Col xs={9}>
-            <h1 className="text-center ">Top Rated Movies</h1>
-            <Slider {...settings}>
-              {data?.map((item) => (
-                <Col key={item.id} xs={12} md={4} lg={3}>
-                  <MovieCard item={item} />
-                </Col>
-              ))}
-            </Slider>
+          <Col>
+            <Row>
+              <h1 className="text-center  ">Top-Rated Movies</h1>
+              {data
+                ?.map((item, i) => (
+                  <Col key={i} xs={12} md={4} lg={3}>
+                    <MovieCard item={item} />
+                  </Col>
+                ))
+                .slice(0, 4)}
+            </Row>
+            <Button
+              id="loadmorebutton"
+              className="m-3"
+              variant="secondary"
+              onClick={loadMoreMovies}
+            >
+              Load More
+            </Button>
           </Col>
         </Row>
       </Container>

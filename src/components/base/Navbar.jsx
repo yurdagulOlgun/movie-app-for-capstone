@@ -72,7 +72,7 @@ const Navbar = () => {
           onClick={clickHandler}
           theme={themeName}
         >
-          {theme ? <BiToggleRight /> : <BiToggleLeft />}
+          {theme ? <BiToggleRight size="1.5rem"/> : <BiToggleLeft size="1.5rem" />}
         </ThemeButton>
         
       </Menu2>

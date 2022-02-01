@@ -4,8 +4,8 @@ import { Col } from "react-bootstrap";
 import Slider from "react-slick";
 import MovieCard from "./MovieCard";
 
-export default function Trending() {
-  const { data } = useQuery("trend movies ", fetchTrendDayMovies, {
+export default function Trending({trend}) {
+  const { data } = useQuery(["trend movies ",trend],() => fetchTrendDayMovies(trend), {
     retry: false,
     select: (data) => data.data.results,
   });
@@ -21,7 +21,7 @@ export default function Trending() {
 
   return (
     <>
-      <Slider {...settings}>
+      <Slider {...settings} className="mb-5 mt-2">
         {data?.map((item) => (
           <Col key={item.id} xs={12} md={4} lg={3}>
             <MovieCard item={item} />

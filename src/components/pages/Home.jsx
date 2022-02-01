@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import { useRef, useState } from "react";
 import Search from "../Search";
-import { Col, Container, Row} from "react-bootstrap";
+import { Button, Col, Container, Row} from "react-bootstrap";
 import Discover from "../Discover";
 import Trending from "../Trending";
 import { fetchSearchMovies } from "../../data";
@@ -9,6 +9,7 @@ import MovieCard from "../MovieCard";
 
 export default function Home() {
   const [q, setQ] = useState("");
+  const [trend, setTrend] = useState("day")
   const inputRef = useRef();
   const { data } = useQuery(["search movies ", q], () => fetchSearchMovies(q), {
     retry: false,
@@ -57,8 +58,29 @@ export default function Home() {
           <Discover />
         </Row>
         <Row className="mt-5">
-          <h3>Trending</h3>
-          <Trending />
+          
+            <Row>
+              <Col md={2}>
+                <h3>Trending--</h3>
+              </Col>
+            
+           <Col md={{ span: 2}}> 
+          <select
+          className="form-select"
+          aria-label="Default select example"
+          onChange={(e) =>
+            setTrend(e.target.options[e.target.selectedIndex].value)
+          }
+        >
+          <option value="day">Day</option>
+          <option value="week">Week</option>
+          </select>
+           </Col>
+            </Row>
+            
+         
+          
+          <Trending trend={trend}/>
         </Row>
       </Container>
     </>
