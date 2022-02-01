@@ -23,7 +23,8 @@ export default function FavSeen ({item}) {
                   item.id,
                   item.title,
                   item.poster_path,
-                  item.release_date
+                  item.release_date,
+                  item.genre_ids
                 )
               )
             }
@@ -38,7 +39,8 @@ export default function FavSeen ({item}) {
                 item.id,
                 item.title,
                 item.poster_path,
-                item.release_date
+                item.release_date,
+                item.genre_ids
               )
             )
           }/> )

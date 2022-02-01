@@ -4,13 +4,14 @@ const REMOVE_FAVORITE = "REMOVE_FAVORITE";
 
 //ACTION CREATORS
 
-export const addFavorite = (id, title, poster_path, release_date) => ({
+export const addFavorite = (id, title, poster_path, release_date, genre_ids) => ({
   type: ADD_FAVORITE,
   payload: {
     id,
     title,
     poster_path,
     release_date,
+    genre_ids,
   },
 });
 

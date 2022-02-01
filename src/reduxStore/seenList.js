@@ -4,13 +4,14 @@ const REMOVE_SEEN_LIST = "REMOVE_SEEN_LIST";
 
 //ACTION CREATORS
 
-export const addSeenList = (id, title, poster_path, release_date) => ({
+export const addSeenList = (id, title, poster_path, release_date,genre_ids) => ({
   type: ADD_SEEN_LIST,
   payload: {
     id,
     title,
     poster_path,
     release_date,
+    genre_ids,
   },
 });
 
