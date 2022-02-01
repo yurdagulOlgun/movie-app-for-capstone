@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
 import { BiToggleLeft, BiToggleRight } from "react-icons/bi";
 import { changeThemeAction } from "../../reduxStore/themeChanger";
+import { userLogout } from "../../reduxStore/user";
 
 const Navbar = () => {
   const [theme, setTheme] = useState("light");
@@ -51,9 +52,7 @@ const Navbar = () => {
         >
           Top Rated
         </MenuLink>
-        <StyledLink to="/login" theme={themeName}>
-          Login
-        </StyledLink>
+        
         {login?.login && (
           <StyledLink to="/profile" theme={themeName}>
             Profile
@@ -62,6 +61,11 @@ const Navbar = () => {
       </Menu>
       <Menu2>
         {login?.login && <UserIcon src={`${login.avatarUrl}`} />}
+        {login?.login ? (<StyledLink to="/" theme={themeName} onClick={()=> dispatch(userLogout(false)) }>
+          Logout
+        </StyledLink>) : (<StyledLink to="/login" theme={themeName}>
+          Login
+        </StyledLink>)}
         <ThemeButton
           id="themebutton"
           variant="outline"
@@ -70,6 +74,7 @@ const Navbar = () => {
         >
           {theme ? <BiToggleRight /> : <BiToggleLeft />}
         </ThemeButton>
+        
       </Menu2>
     </Nav>
   );
@@ -85,7 +90,6 @@ const StyledLink = styled(Link)`
   color: ${(props) => (props.theme === "light" ? "#14213D" : "#FCA311")};
   transition: all 0.3s ease-in;
   font-size: 0.9rem;
-
   &:hover {
     color: ${({ theme }) => (theme === "light" ? "#FF5400" : "#390099")};
   }
@@ -99,7 +103,6 @@ const MenuLink = styled.a`
   color: ${({ theme }) => (theme === "light" ? "#14213D" : "#FCA311")};
   transition: all 0.3s ease-in;
   font-size: 0.9rem;
-
   &:hover {
     color: ${({ theme }) => (theme === "light" ? "#FF5400" : "#390099")};
   }
@@ -113,7 +116,6 @@ const Nav = styled.div`
   flex-wrap: nowrap;
   background-color: ${({ theme }) =>
     theme === "light" ? "#FFBD00" : "#9E0059"};
-
   position: relative;
   top: 0;
   left: 0;

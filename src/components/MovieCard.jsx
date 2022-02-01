@@ -39,7 +39,6 @@ const CardStyle = styled(Card)`
   padding: 1rem;
   border-radius: 5%;
   width: 90%;
-  height: 90%;
 `;
 
 const CardTitle = styled(Card.Title)`

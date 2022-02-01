@@ -1,9 +1,15 @@
 const USER_LOGIN = "USER_LOGIN";
+const USER_LOGOUT = "USER_LOGOUT";
 
 export const userLogin = (username, password) => ({
   type: USER_LOGIN,
   payload: { username, password },
 });
+
+export const userLogout = (value) => ({
+  type: USER_LOGOUT,
+  payload: value
+})
 
 const loginReducer = (
   user = {
@@ -25,6 +31,8 @@ const loginReducer = (
         action.payload.password === user.password
         ? { ...user, login: true }
         : { ...user, login: false };
+    case USER_LOGOUT:
+      return {...user, login:false}
     default:
       return user;
   }
