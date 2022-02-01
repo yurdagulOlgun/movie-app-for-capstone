@@ -19,7 +19,7 @@ export default function Login() {
 
   useEffect(() => {
     if (login?.login) {
-      navigate("/profile");
+      navigate("/");
     }
   }, [navigate, login]);
   function handleSubmit(event) {

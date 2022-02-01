@@ -1,16 +1,18 @@
 import { useSelector } from "react-redux";
-// import MovieCard from "../MovieCard";
 import { Col, Container, Row, Table } from "react-bootstrap";
 import UserInfo from "../UserInfo";
-import { AiFillStar } from "react-icons/ai";
-import { IoVideocam } from "react-icons/io5";
+import FavSeen from "../FavSeen"
 
 export default function Profile() {
   const { favorites, seenList } = useSelector((state) => state);
-
-  const movies = [...favorites?.films.concat(...seenList?.seenFilms)];
   
-  // console.log(favorites?.films[0]?.id, movies[0]?.id);
+
+  const movies = favorites?.films.concat(seenList?.seenFilms);
+//   let a = ["1", "1", "2", "3", "3", "1"];
+// let unique = a.filter((item, i, ar) => ar.indexOf(item) === i);
+// console.log(unique);
+
+  const unique = movies?.filter((item,index,ar) => ar?.map((data) => data.id).indexOf(item.id) === index);
 
   return (
     <>
@@ -30,14 +32,14 @@ export default function Profile() {
             </tr>
           </thead>
           <tbody>
-            {movies?.map((item, i) => (
+            {unique?.map((item, i) => (
               <tr key={i}>
                 <td >{item.id}</td>
 
                 <td>{item.title}</td>
 
                 <td>Genre </td>
-                <td>{ item.id === favorites?.films?.id  && <AiFillStar/>  } {seenList?.seenFilms?.id === item.id && <IoVideocam/> }</td>
+                <td><FavSeen item={item}/></td>
               </tr>
             ))}
           </tbody>
@@ -45,23 +47,4 @@ export default function Profile() {
       </Container>
     </>
   );
-}
-
-{
-  /* <Row className="mt-5">
-          <h1>Favorites</h1>
-          {favorites?.films?.map((item, index) => (
-            <Col key={index} xs={12} md={4} lg={3}>
-              <MovieCard item={item} />
-            </Col>
-          ))}
-        </Row>
-        <Row className="mt-5">
-          <h1>Seen</h1>
-          {seenList?.seenFilms?.map((item, index) => (
-            <Col key={index} xs={12} md={4} lg={3}>
-              <MovieCard item={item} />
-            </Col>
-          ))} 
-        </Row>*/
 }

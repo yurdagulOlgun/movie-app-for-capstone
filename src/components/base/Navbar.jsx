@@ -14,8 +14,8 @@ const Navbar = () => {
   const themeName = changeTheme ? "light" : "dark";
 
   function clickHandler(event) {
-    if (event.target.id === "themebutton") {
-    }
+    // if (event.target.id === "themebutton") {
+    // }
     setTheme(!theme);
     dispatch(changeThemeAction(theme));
   }

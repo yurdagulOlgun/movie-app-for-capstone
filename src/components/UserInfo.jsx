@@ -4,11 +4,11 @@ import { FiInstagram, FiTwitter, FiGithub } from "react-icons/fi";
 import { useSelector } from "react-redux";
 
 export default function UserInfo() {
-  const { login, favorites, seenList } = useSelector((state) => state);
-
+  const { login, favorites, seenList, changeTheme } = useSelector((state) => state);
+  const themeName = changeTheme ? "light" : "dark"
   return (
     <>
-      <UserCard>
+      <UserCard theme={themeName}>
         <UserCardImg src={`${login.avatarUrl}`} />
         <UserCardBody>
           <Card.Title>{login.username}</Card.Title>
@@ -38,7 +38,7 @@ const UserCard = styled(Card)`
 padding: 30px;
   display: flex;
   flex-direction: row;
-  border: 2px solid darkgray;
+  border: 2px solid ${({ theme }) => (theme === "light" ? "#FF5400" : "#390099")};
   border-radius: 50px 5px;
   justify-content: space-between;
 `;
