@@ -9,7 +9,7 @@ import { userLogout } from "../../reduxStore/user";
 
 const Navbar = () => {
   const [theme, setTheme] = useState("light");
-  const [hidden, setHidden] = useState(true);
+  const [hidden, setHidden] = useState(false);
   const dispatch = useDispatch();
   const { changeTheme, login } = useSelector((state) => state);
   const themeName = changeTheme ? "light" : "dark";
@@ -26,30 +26,21 @@ const Navbar = () => {
         <MenuLink href="/" theme={themeName}>
           Home
         </MenuLink>
-        <MenuLink
-          dropdownToggle
-          onClick={() => setHidden(!hidden)}
-          theme={themeName}
-        >
+        <MenuLink onClick={() => setHidden(!hidden)} theme={themeName}>
           Movies
         </MenuLink>
-        <MenuLink
-          href="popular"
-          hidden={hidden}
-          toggle={() => setHidden(!hidden)}
-          theme={themeName}
-        >
-          Popular
-        </MenuLink>
-        <MenuLink
-          href="top-rated"
-          hidden={hidden}
-          toggle={() => setHidden(!hidden)}
-          theme={themeName}
-        >
-          Top Rated
-        </MenuLink>
-        
+        {hidden && (
+          <StyledLink to="/popular" theme={themeName}>
+            Popular
+          </StyledLink>
+        )}
+
+        {hidden && (
+          <StyledLink to="top-rated" theme={themeName}>
+            Top Rated
+          </StyledLink>
+        )}
+
         {login?.login && (
           <StyledLink to="/profile" theme={themeName}>
             Profile
@@ -58,20 +49,31 @@ const Navbar = () => {
       </Menu>
       <Menu2>
         {login?.login && <UserIcon src={`${login.avatarUrl}`} />}
-        {login?.login ? (<StyledLink to="/" theme={themeName} onClick={()=> dispatch(userLogout(false)) }>
-          Logout
-        </StyledLink>) : (<StyledLink to="/login" theme={themeName}>
-          Login
-        </StyledLink>)}
+        {login?.login ? (
+          <StyledLink
+            to="/"
+            theme={themeName}
+            onClick={() => dispatch(userLogout(false))}
+          >
+            Logout
+          </StyledLink>
+        ) : (
+          <StyledLink to="/login" theme={themeName}>
+            Login
+          </StyledLink>
+        )}
         <ThemeButton
           id="themebutton"
           variant="outline"
           onClick={clickHandler}
           theme={themeName}
         >
-          {theme ? <BiToggleRight size="1.5rem"/> : <BiToggleLeft size="1.5rem" />}
+          {theme ? (
+            <BiToggleRight size="1.5rem" />
+          ) : (
+            <BiToggleLeft size="1.5rem" />
+          )}
         </ThemeButton>
-        
       </Menu2>
     </Nav>
   );
