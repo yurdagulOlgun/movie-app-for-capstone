@@ -35,4 +35,5 @@ const ThemeBody = styled.body`
   color: ${({ theme }) => (theme === "light" ? "#277DA1" : "#F94144")};
   margin-top: 0;
   margin-bottom: 0;
+  height: fit-content;
 `;
