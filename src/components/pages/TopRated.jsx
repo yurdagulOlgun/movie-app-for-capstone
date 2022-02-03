@@ -3,43 +3,37 @@ import { fetchTopRatedMovies } from "../../data";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import SortFilter from "../SortFilter";
 import MovieCard from "../MovieCard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 
 export default function TopRated() {
   const { filtered } = useSelector((state) => state);
-  const [page, setPage] = useState(1);
+  const [size, setSize] = useState(4);
 
-  const { data } = useQuery(["movies", page], () => fetchTopRatedMovies(page), {
+  const { data } = useQuery(["movies"], () => fetchTopRatedMovies(), {
     retry: false,
     select: (data) => data.data.results,
   });
 
-  function loadMoreMovies(event) {
-    setPage(page + 1);
 
-    // dispatch(loadMoreData(data));
-    // return (
-    //   <>
-    //     {moreData[0]
-    //       ?.map((item, i) => (
-    //         <Col key={i} xs={12} md={3} lg={2}>
-    //           <MovieCard item={item} />
-    //         </Col>
-    //       ))
-    //       .slice(0, 4)
-    //       }
-    //   </>
-    // );
+  useEffect(() => {
+    setSize(4)
+  }, [data])
+
+  function loadMoreMovies() {
+    if (data.length > size) {
+      setSize(size + 4);
+    }
   }
+
 
   if (filtered[0]?.results?.length > 0) {
     return (
       <Container>
         <Row>
           <Col className=" align-self-start mt-5 mx-3" xs={3}>
-            <SortFilter page={page} />
+            <SortFilter />
           </Col>
           <Col>
             <Row>
@@ -50,7 +44,7 @@ export default function TopRated() {
                     <MovieCard item={item} />
                   </Col>
                 ))
-                .slice(0, 4)}
+                .slice(0, size)}
             </Row>
             <Button
               id="loadmorebutton"
@@ -71,7 +65,7 @@ export default function TopRated() {
       <Container>
         <Row>
           <Col className="align-self-start mt-5 mx-3" xs={3}>
-            <SortFilter page={page} />
+            <SortFilter/>
           </Col>
           <Col>
             <Row>
@@ -82,7 +76,7 @@ export default function TopRated() {
                     <MovieCard item={item} />
                   </Col>
                 ))
-                .slice(0, 4)}
+                .slice(0, size)}
             </Row>
             <Button
               id="loadmorebutton"

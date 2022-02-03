@@ -17,13 +17,13 @@ export default function SortFilter({ page }) {
 
   useEffect(() => {
     fetch(
-      `https://api.themoviedb.org/3/movie/popular?api_key=2d20344e6f6a87e7e2ad84a103865cd9&sort_by=${sort}&release_date.gte=${dateFrom}&release_date.lte=${dateTo}&with_genres=${genre_id}&page=${page}`
+      `https://api.themoviedb.org/3/movie/popular?api_key=2d20344e6f6a87e7e2ad84a103865cd9&sort_by=${sort}&release_date.gte=${dateFrom}&release_date.lte=${dateTo}&with_genres=${genre_id}`
     )
       .then((response) => response.json())
       .then((data) => {
         setData(data)
       });
-  }, [dateTo, dateFrom, sort, genre_id, page]);
+  }, [dateTo, dateFrom, sort, genre_id]);
  
 
 

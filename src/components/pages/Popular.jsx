@@ -4,19 +4,26 @@ import { Button, Col, Container, Row } from "react-bootstrap";
 import SortFilter from "../SortFilter";
 import MovieCard from "../MovieCard";
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function TopRated() {
-  const [page, setPage] = useState(1);
+  const [size, setSize] = useState(4);
   const { filtered } = useSelector((state) => state);
 
-  const { data } = useQuery(["movies", page], () => fetchPopularMovies(page), {
+  const { data } = useQuery(["movies"], () => fetchPopularMovies(), {
     retry: false,
     select: (data) => data.data.results,
   });
 
+
+  useEffect(() => {
+    setSize(4)
+  }, [data])
+
   function loadMoreMovies() {
-    setPage(page + 1);
+    if (data.length > size) {
+      setSize(size + 4);
+    }
   }
 
   if (filtered[0]?.results?.length > 0) {
@@ -24,7 +31,7 @@ export default function TopRated() {
       <Container>
         <Row>
           <Col className=" align-self-start mt-5 mx-3" xs={3}>
-            <SortFilter page={page} />
+            <SortFilter />
           </Col>
           <Col>
             <Row>
@@ -35,7 +42,7 @@ export default function TopRated() {
                     <MovieCard item={item} />
                   </Col>
                 ))
-                .slice(0, 4)}
+                .slice(0, size)}
             </Row>
             <Button
               id="loadmorebutton"
@@ -56,7 +63,7 @@ export default function TopRated() {
       <Container>
         <Row>
           <Col className="align-self-start mt-5 mx-3" xs={3}>
-            <SortFilter page={page} />
+            <SortFilter  />
           </Col>
           <Col>
             <Row>
@@ -67,7 +74,7 @@ export default function TopRated() {
                     <MovieCard item={item} />
                   </Col>
                 ))
-                .slice(0, 4)}
+                .slice(0, size)}
             </Row>
             <Button
               id="loadmorebutton"

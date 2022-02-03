@@ -34,7 +34,7 @@ const Navbar = () => {
           Movies
         </MenuLink>
         <MenuLink
-          href="/popular"
+          href="popular"
           hidden={hidden}
           toggle={() => setHidden(!hidden)}
           theme={themeName}
@@ -42,7 +42,7 @@ const Navbar = () => {
           Popular
         </MenuLink>
         <MenuLink
-          href="/top-rated"
+          href="top-rated"
           hidden={hidden}
           toggle={() => setHidden(!hidden)}
           theme={themeName}
